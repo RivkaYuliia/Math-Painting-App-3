@@ -1,5 +1,6 @@
 import numpy as np
 from PIL import Image
+import valid
 
 
 class Canvas:
@@ -37,13 +38,16 @@ class Rectangle:
         img.save(canvas.filename)
 
 
+validator = valid.Validator()
 print("Hi! Let's create a canvas to draw something.")
 canvas_w = int(input('What is the width of the canvas? '))
 canvas_h = int(input('What is the height of the canvas? '))
-user_color = input('What is the color of the canvas, white(w) or black(b)? ')
+while user_color := validator.canvas_color(input('What is the color of the canvas, white(w) or black(b)? ')) is False:
+    print('The color can be either white or black (w or b). Enter right letter please.')
 canvas_color = [255, 255, 255] if user_color == 'w' else [0, 0, 0]
 while True:
-    form = input('What do you want to draw, a square(s) or a rectangle(r)? (type "q" for exit) ')
+    while form := validator.form(input('What do you want to draw, a square(s) or a rectangle(r)? (enter "q" for exit) ')) is False:
+        print('Pleas enter a right form that is "square" or "rectangle" (s or r), or enter "q" for exit')
     if form == 'q':
         break
     x = int(input('Enter the X of the upper left point: '))
