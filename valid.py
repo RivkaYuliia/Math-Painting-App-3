@@ -2,9 +2,6 @@ class Validator:
     """
     Contains several methods for validation of user inputs, such as color and form
     """
-    # def __init__(self, user_input: str | int = None) -> None:
-    #     self.user_input = user_input
-
     def canvas_color(self, user_input: str) -> str:
         while True:
             if user_input == 'w' or user_input == 'b':

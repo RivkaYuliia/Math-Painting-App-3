@@ -17,8 +17,6 @@ canvas = Canvas(canvas_w, canvas_h, canvas_color)
 
 while True:
     form = validator.form(input('What do you want to draw, a square(s) or a rectangle(r)? (enter "q" for exit): '))
-    # while validator.form(form) is False:
-    #     form = input('Please enter the right form that is "square" or "rectangle" (s or r), or enter "q" for exit: ')
     if form == 'q':
         break
     x = int(validator.integer(input('Enter the X of the upper left point: ')))
@@ -28,17 +26,13 @@ while True:
     else:
         width = int(validator.integer(input('Enter the width of the rectangle: ')))
         height = int(validator.integer(input('Enter the height of the rectangle: ')))
-    color = [
-        int(validator.color(input('Now the color! How much red in the color (from 0 to 255)? '))),
-        int(validator.color(input('How much green in the color (from 0 to 255)? '))),
-        int(validator.color(input('How much blue in the color (from 0 to 255)? ')))
-    ]
+    color = list()
+    for i in ('red', 'green', 'blue'):
+        color.append(int(validator.color(input(f'How much {i} in the color (from 0 to 255)? '))))
 
-    rect = Rectangle(x, y, width, height, color)
+    rect = Rectangle(x, y, width, height, color)    # Creates a rectangle or a square and adds it to the canvas array
     rect.draw(canvas)
 
-canvas.make()
+canvas.make()    # Writes all the drawing to the canvas file
 
-# Opens the result file with all the drawings that the user has made
-
-webbrowser.open(canvas.filepath)
+webbrowser.open(canvas.filepath)    # Opens the result file with all the drawings that the user has made
