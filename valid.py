@@ -2,7 +2,8 @@ class Validator:
     """
     Contains several methods for validation of user inputs, such as color and form
     """
-    def canvas_color(self, user_input: str) -> str:
+    @staticmethod
+    def canvas_color(user_input: str) -> str:
         while True:
             if user_input == 'w' or user_input == 'b':
                 break
@@ -10,7 +11,8 @@ class Validator:
                 user_input = input('The color can be either white or black (w or b). Enter the right letter please: ')
         return user_input
 
-    def form(self, user_input: str) -> str:
+    @staticmethod
+    def form(user_input: str) -> str:
         while True:
             if user_input == 's' or user_input == 'r' or user_input == 'q':
                 break
@@ -19,7 +21,8 @@ class Validator:
                                    'enter "q" for exit: ')
         return user_input
 
-    def integer(self, user_input: str) -> str:
+    @staticmethod
+    def integer(user_input: str) -> str:
         while True:
             if user_input.isdigit():
                 break
@@ -27,7 +30,8 @@ class Validator:
                 user_input = input('Enter a positive integer, please: ')
         return user_input
 
-    def color(self, user_input: str) -> str:
+    @staticmethod
+    def color(user_input: str) -> str:
         while True:
             if user_input.isdigit() and 0 <= int(user_input) <= 255:
                 break
