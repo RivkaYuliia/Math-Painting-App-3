@@ -1,5 +1,6 @@
 from draw import Canvas, Rectangle
 import valid
+import webbrowser
 
 validator = valid.Validator()
 
@@ -34,3 +35,5 @@ while True:
 
     rect = Rectangle(x, y, width, height, color)
     rect.draw(canvas)
+
+webbrowser.open(canvas.filename)
