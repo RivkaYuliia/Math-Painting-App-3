@@ -1,53 +1,22 @@
-import numpy as np
-from PIL import Image
+from draw import Canvas, Rectangle
 import valid
 
-
-class Canvas:
-    """
-    Creates the canvas on which the forms will be drawn and saves it
-    to the file canvas.png
-    """
-    def __init__(self, width: int, height: int, color: list[int], filename='canvas.png', array=None) -> None:
-        self.width = width
-        self.height = height
-        self.color = color
-        self.array = array
-        self.filename = filename
-
-    def make(self) -> None:
-        array = np.zeros((self.height, self.width, 3), np.uint8)
-        array[:] = [self.color[0], self.color[1], self.color[2]]
-        self.array = array
-
-
-class Rectangle:
-    """
-    Draws forms such as rectangles or squares in the canvas file.
-    """
-    def __init__(self, x: int, y: int, width: int, height: int, color: list[int]) -> None:
-        self.x = x
-        self.y = y
-        self.width = width
-        self.height = height
-        self.color = color
-
-    def draw(self, canvas: Canvas):
-        canvas.array[self.y:self.y+self.height, self.x:self.x+self.width] = self.color
-        img = Image.fromarray(canvas.array, 'RGB')
-        img.save(canvas.filename)
-
-
 validator = valid.Validator()
+
 print("Hi! Let's create a canvas to draw something.")
 canvas_w = int(input('What is the width of the canvas? '))
 canvas_h = int(input('What is the height of the canvas? '))
-while user_color := validator.canvas_color(input('What is the color of the canvas, white(w) or black(b)? ')) is False:
-    print('The color can be either white or black (w or b). Enter right letter please.')
+user_color = input('What is the color of the canvas, white(w) or black(b)? ')
+while validator.canvas_color(user_color) is False:
+    user_color = input('The color can be either white or black (w or b). Enter the right letter please: ')
 canvas_color = [255, 255, 255] if user_color == 'w' else [0, 0, 0]
+canvas = Canvas(canvas_w, canvas_h, canvas_color)
+canvas.make()
+
 while True:
-    while form := validator.form(input('What do you want to draw, a square(s) or a rectangle(r)? (enter "q" for exit) ')) is False:
-        print('Pleas enter a right form that is "square" or "rectangle" (s or r), or enter "q" for exit')
+    form = input('What do you want to draw, a square(s) or a rectangle(r)? (enter "q" for exit): ')
+    while validator.form(form) is False:
+        form = input('Please enter the right form that is "square" or "rectangle" (s or r), or enter "q" for exit: ')
     if form == 'q':
         break
     x = int(input('Enter the X of the upper left point: '))
@@ -63,7 +32,5 @@ while True:
         int(input('How much blue in the color (from 0 to 255)? '))
     ]
 
-canvas = Canvas(canvas_w, canvas_h, canvas_color)
-canvas.make()
-rect = Rectangle(x, y, width, height, color)
-rect.draw(canvas)
+    rect = Rectangle(x, y, width, height, color)
+    rect.draw(canvas)
