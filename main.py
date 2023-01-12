@@ -4,6 +4,8 @@ import webbrowser
 
 validator = valid.Validator()
 
+# Creates canvas
+
 print("Hi! Let's create a canvas to draw something.")
 canvas_w = int(input('What is the width of the canvas? '))
 canvas_h = int(input('What is the height of the canvas? '))
@@ -13,6 +15,8 @@ while validator.canvas_color(user_color) is False:
 canvas_color = [255, 255, 255] if user_color == 'w' else [0, 0, 0]
 canvas = Canvas(canvas_w, canvas_h, canvas_color)
 canvas.make()
+
+# Main loop for drawing squares and rectangles
 
 while True:
     form = input('What do you want to draw, a square(s) or a rectangle(r)? (enter "q" for exit): ')
@@ -35,5 +39,7 @@ while True:
 
     rect = Rectangle(x, y, width, height, color)
     rect.draw(canvas)
+
+# Opens the result file with all the drawings that the user has made
 
 webbrowser.open(canvas.filename)
