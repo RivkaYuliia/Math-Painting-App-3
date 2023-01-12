@@ -2,17 +2,38 @@ class Validator:
     """
     Contains several methods for validation of user inputs, such as color and form
     """
-    def __init__(self, user_input: str | int = None) -> None:
-        self.user_input = user_input
+    # def __init__(self, user_input: str | int = None) -> None:
+    #     self.user_input = user_input
 
-    def canvas_color(self, user_input):
-        self.user_input = user_input
-        if self.user_input == 'w' or self.user_input == 'b':
-            return self.user_input
-        return False
+    def canvas_color(self, user_input: str) -> str:
+        while True:
+            if user_input == 'w' or user_input == 'b':
+                break
+            else:
+                user_input = input('The color can be either white or black (w or b). Enter the right letter please: ')
+        return user_input
 
-    def form(self, user_input):
-        self.user_input = user_input
-        if self.user_input == 's' or self.user_input == 'r' or self.user_input == 'q':
-            return self.user_input
-        return False
+    def form(self, user_input: str) -> str:
+        while True:
+            if user_input == 's' or user_input == 'r' or user_input == 'q':
+                break
+            else:
+                user_input = input('Please enter the right form that is "square" or "rectangle" (s or r), or '
+                                   'enter "q" for exit: ')
+        return user_input
+
+    def integer(self, user_input: str) -> str:
+        while True:
+            if user_input.isdigit():
+                break
+            else:
+                user_input = input('Enter a positive integer, please: ')
+        return user_input
+
+    def color(self, user_input: str) -> str:
+        while True:
+            if user_input.isdigit() and 0 <= int(user_input) <= 255:
+                break
+            else:
+                user_input = input('Enter a positive integer from 0 up to 255, please: ')
+        return user_input
