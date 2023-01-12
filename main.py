@@ -2,7 +2,7 @@ from draw import Canvas, Rectangle
 import valid
 import webbrowser
 
-validator = valid.Validator()
+validator = valid.Validator()  # We will use it to validate the user's inputs
 
 # Creates canvas
 
@@ -14,7 +14,6 @@ while validator.canvas_color(user_color) is False:
     user_color = input('The color can be either white or black (w or b). Enter the right letter please: ')
 canvas_color = [255, 255, 255] if user_color == 'w' else [0, 0, 0]
 canvas = Canvas(canvas_w, canvas_h, canvas_color)
-canvas.make()
 
 # Main loop for drawing squares and rectangles
 
@@ -40,6 +39,8 @@ while True:
     rect = Rectangle(x, y, width, height, color)
     rect.draw(canvas)
 
+canvas.make()
+
 # Opens the result file with all the drawings that the user has made
 
-webbrowser.open(canvas.filename)
+webbrowser.open(canvas.filepath)
